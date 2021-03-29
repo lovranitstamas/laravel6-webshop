@@ -13,7 +13,13 @@ class CreateWishListsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('wish_lists', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            $table->engine = 'InnoDB';
+
+            $table->bigInteger('id')->autoIncrement();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class CreateWishListsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('wish_list');
     }
 }

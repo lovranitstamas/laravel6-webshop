@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             //$table->bigIncrements('id');
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
@@ -22,7 +22,7 @@ class CreateCommentsTable extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->bigInteger('customer_id')->nullable(false);
             $table->bigInteger('product_id')->nullable(false);
-            $table->text('content')->nullable(false);
+            $table->tinyInteger('value')->nullable(false);
 
             $table->timestamps();
 
@@ -48,10 +48,10 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
+        Schema::table('ratings', function (Blueprint $table) {
             $table->dropForeign(['customer_id', 'product_id']);
         });
 
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('ratings');
     }
 }

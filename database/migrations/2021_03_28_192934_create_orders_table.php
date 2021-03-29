@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,26 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             //$table->bigIncrements('id');
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->engine = 'InnoDB';
 
             $table->bigInteger('id')->autoIncrement();
+            //$table->string('id')->primary()->index();
+            //in the future delete
             $table->bigInteger('customer_id')->nullable(false);
+            //
             $table->bigInteger('product_id')->nullable(false);
-            $table->text('content')->nullable(false);
+            $table->smallInteger('quantity')->nullable(false);
+
+            //in the future delete
+            $table->integer('total_amount')->nullable(false);
+            $table->bigInteger('coupon_id')->nullable();
+            $table->tinyInteger('completed')->default(0);
+            //
+
 
             $table->timestamps();
 
@@ -38,6 +48,11 @@ class CreateCommentsTable extends Migration
                 ->references('id')->on('products')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->foreign('coupon_id')
+                ->references('id')->on('coupons')
+                //->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -48,10 +63,12 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['customer_id', 'product_id']);
+        Schema::table('order_states', function (Blueprint $table) {
+            $table->dropForeign(['customer_id']);
+            $table->dropForeign(['product_id']);
+            $table->dropForeign(['coupon_id']);
         });
 
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('orders');
     }
 }
