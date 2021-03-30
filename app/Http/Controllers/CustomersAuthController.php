@@ -23,18 +23,28 @@ class CustomersAuthController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'email' => 'required|email',
             'password' => 'required'
-        ]);
+        ];
 
-        $credentials = $request->only('email', 'password');
+        $validator = \Validator::make($request->toArray(), $rules);
+        $errors = $validator->messages();
 
-        if (\Auth::guard('customer')->attempt($credentials)) {
-            return redirect()->route("customers.index");
+        //$this->validate($request, $rules);
+        if (!count($errors->messages())) {
+            $credentials = $request->only('email', 'password');
+
+            if (\Auth::guard('customer')->attempt($credentials)) {
+                return redirect()->route("customers.index");
+            }
+
+            //$errors = ['error' => 'Email és/vagy jelszó nem megfelelő'];
+
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('errors', $errors);
 
     }
 
