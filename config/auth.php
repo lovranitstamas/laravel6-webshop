@@ -41,6 +41,12 @@ return [
             'provider' => 'users',
         ],
 
+        //own guard to web shop
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -69,6 +75,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
         ],
 
         // 'users' => [
