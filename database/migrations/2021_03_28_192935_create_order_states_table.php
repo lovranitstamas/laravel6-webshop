@@ -15,6 +15,10 @@ class CreateOrderStatesTable extends Migration
     {
         Schema::create('order_states', function (Blueprint $table) {
 
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            $table->engine = 'InnoDB';
+
             $table->string('id')->primary()->index();
             $table->bigInteger('customer_id')->nullable(false);
             $table->integer('total_amount')->nullable(false);

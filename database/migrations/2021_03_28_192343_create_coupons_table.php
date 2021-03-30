@@ -16,6 +16,10 @@ class CreateCouponsTable extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             //$table->bigIncrements('id');
             //$table->string('id')->primary()->index();
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            $table->engine = 'InnoDB';
+
             $table->bigInteger('id')->autoIncrement();
 
             $table->dateTime('valid_from')->nullable(false);

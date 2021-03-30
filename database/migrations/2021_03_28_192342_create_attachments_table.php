@@ -15,6 +15,10 @@ class CreateAttachmentsTable extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             //$table->bigIncrements('id');
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            $table->engine = 'InnoDB';
+
             $table->bigInteger('id')->autoIncrement();
 
             $table->string('attachable_type');
