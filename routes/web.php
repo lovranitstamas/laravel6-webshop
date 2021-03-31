@@ -32,9 +32,8 @@ Route::middleware('customer_auth')->group(function () {
 Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
     Route::namespace('Auth')->group(function () {
         Route::get('/login', 'LoginController@showLoginForm')->name('login.create');
-        Route::post('/login', 'LoginController@login')->name('login.store');            //5.óra
-        Route::post('/logout', 'LoginController@logout')->name('logout');               //5.óra
-        //Route::get('/logout', 'LoginController@logout')->name('logout');               //5.óra
+        Route::post('/login', 'LoginController@login')->name('login.store');
+        Route::post('/logout', 'LoginController@logout')->name('logout');
     });
 
     Route::middleware('admin_auth')->group(function () {
