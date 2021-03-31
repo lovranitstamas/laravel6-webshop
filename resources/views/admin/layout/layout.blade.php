@@ -59,8 +59,8 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- AdminLTE App -->
-{{--<script src="{{asset('js/admin.js')}}"></script>
-@yield('extra-scripts')--}}
+<script src="{{asset('js/admin.js')}}"></script>
+{{--@yield('extra-scripts')--}}
 </body>
 </html>
 
