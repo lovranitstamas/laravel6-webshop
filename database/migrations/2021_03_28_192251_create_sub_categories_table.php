@@ -26,7 +26,7 @@ class CreateSubCategoriesTable extends Migration
             * Constraints
             * */
             $table->foreign('category_id')
-                ->references('id')->on('categories')
+                ->references('id')->on('category')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
         });

@@ -38,6 +38,8 @@ Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
 
     Route::middleware('admin_auth')->group(function () {
         Route::get('/', 'DashboardController@index')->name('dashboard');
+
+        Route::resource('category', 'CategoryController');
     });
 });
 

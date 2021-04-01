@@ -58,9 +58,13 @@
                 </li>--}}
                 @if(auth()->guard()->user())
                     <li class="nav-item">
-{{--                        <a href="{{route('admin.customers.create')}}" class="nav-link">
-                            <p>Ügyfél létrehozása</p>
-                        </a>--}}
+                        <a href="{{route('admin.category.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.category.index'
+                          || \Route::currentRouteName() == 'admin.category.create'
+                          || \Route::currentRouteName() == 'admin.category.edit'
+                          || \Route::currentRouteName() == 'admin.category.show' ? ' active' : ''}}">
+                            <p>Kategória lista</p>
+                        </a>
                     </li>
                 @endif
             </ul>
