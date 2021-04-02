@@ -50,18 +50,30 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
 
-        $category = Category::find($categoryId);
-        //$category = Category::where('id', $categoryId)->first(); null a return , ha nincs eredmény
+        try {
+            //$category = Category::where('id', $categoryId)->first(); null a return , ha nincs eredmény
+            $category = Category::findOrFail($categoryId);
 
-        return view('admin.category.show')->with('category', $category);
+            return view('admin.category.show')->with('category', $category);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
 
     public function edit($categoryId)
     {
-        $category = Category::findOrFail($categoryId);
 
-        return view('admin.category.edit')->with('category', $category);
+        try {
+            $category = Category::findOrFail($categoryId);
+            return view('admin.category.edit')->with('category', $category);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
