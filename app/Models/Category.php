@@ -13,4 +13,9 @@ class Category extends Model
     {
         $this->name_hu = $data['name_hu'];
     }
+
+    public function subCategories()
+    {
+        return $this->hasMany(Sub_category::class);
+    }
 }

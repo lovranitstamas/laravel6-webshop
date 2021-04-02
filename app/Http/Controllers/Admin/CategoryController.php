@@ -68,7 +68,7 @@ class CategoryController extends Controller
     {
 
         $this->validate($request, [
-            'name_hu' => 'required|max:30|unique:categories,name_hu,' . $request->id,
+            'name_hu' => 'required|max:30|unique:categories,name_hu,' . $id,
         ]);
 
         $category = Category::findOrFail($id);

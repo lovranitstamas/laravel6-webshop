@@ -66,6 +66,15 @@
                             <p>Kategória lista</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.sub_category.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.sub_category.index'
+                          || \Route::currentRouteName() == 'admin.sub_category.create'
+                          || \Route::currentRouteName() == 'admin.sub_category.edit'
+                          || \Route::currentRouteName() == 'admin.sub_category.show' ? ' active' : ''}}">
+                            <p>Alkategória lista</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>

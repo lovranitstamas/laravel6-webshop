@@ -5,10 +5,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Kategóriák</h3>
+                    <h3 class="card-title">Alkategóriák</h3>
 
                     <div class="card-tools">
-                        <a href="{{route('admin.category.create')}}" class="btn btn-primary">Kategória létrehozása</a>
+                        <a href="{{route('admin.sub_category.create')}}" class="btn btn-primary">Alkategória
+                            létrehozása</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -18,6 +19,7 @@
                         <tr>
                             <th>#</th>
                             <th>Név</th>
+                            <th>Kategória</th>
                             <th>Létrehozás dátuma</th>
                             <th>Módosítás dátuma</th>
                             <th>Megtekintés/Módosítás</th>
@@ -25,19 +27,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $category)
+                        @foreach($subCategories as $subCategory)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name_hu}}</td>
-                                <td>{{$category->created_at}}</td>
-                                <td>{{$category->updated_at}}</td>
+                                <td>{{$subCategory->id}}</td>
+                                <td>{{$subCategory->name_hu}}</td>
+                                <td>
+                                    {{$subCategory->category->name_hu}}
+                                </td>
+                                <td>{{$subCategory->created_at}}</td>
+                                <td>{{$subCategory->updated_at}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{route('admin.category.show', $category->id)}}"
+                                        <a href="{{route('admin.sub_category.show', $subCategory->id)}}"
                                            class="btn btn-info btn-sm">Megtekintés</a>
                                         {{--['id' => $category->id]--}}
-                                        @if($category->subCategories()->count()==0)
-                                            <a href="{{route('admin.category.edit', $category->id)}}"
+                                        @if($subCategory->products()->count()==0)
+                                            <a href="{{route('admin.sub_category.edit', $subCategory->id)}}"
                                                class="btn btn-default btn-sm">Módosítás</a>
                                         @else
                                             | Tiltás alatt
@@ -45,8 +50,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if($category->subCategories()->count()==0)
-                                        <form action="{{route('admin.category.destroy', $category->id)}}" method="POST">
+                                    @if($subCategory->products()->count()==0)
+                                        <form action="{{route('admin.sub_category.destroy', $subCategory->id)}}"
+                                              method="POST">
                                             <input type="hidden" name="_method" value="delete">
                                             @csrf
                                             <input type="submit" name="button" value="Törlés" class="btn btn-danger">
@@ -57,7 +63,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if (count($categories)==0)
+                        @if (count($subCategories)==0)
                             <td colspan="5"><h4 class="text-center font-weight-bold">A lista üres</h4></td>
                         @endif
                         </tbody>
