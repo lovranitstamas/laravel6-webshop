@@ -71,13 +71,24 @@ class CategoryController extends Controller
             'name_hu' => 'required|max:30|unique:categories,name_hu,' . $id,
         ]);
 
-        $category = Category::findOrFail($id);
-
-        $category->setAttributes($request->all());
-
         try {
-            $category->save();
-            session()->flash('success', 'Kategória módosítva');
+
+            $category = Category::findOrFail($id);
+
+            if (!Category::has('subCategories')->get()) {
+                //if($category->subCategories()->count()==0) {
+
+                $category->setAttributes($request->all());
+
+                try {
+                    $category->save();
+                    session()->flash('success', 'Kategória módosítva');
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+                }
+            } else {
+                session()->flash('error', "Módosítás elutasítva: alkategórához rendelés már megtörtént.");
+            }
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
@@ -88,11 +99,20 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $category = Category::find($id);
-
         try {
-            $category->delete();
-            session()->flash('success', 'Kategória törölve');
+
+            $category = Category::findOrFail($id);
+
+            if (!Category::has('subCategories')->get()) {
+                try {
+                    $category->delete();
+                    session()->flash('success', 'Kategória törölve');
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+                }
+            } else {
+                session()->flash('error', "Törlés elutasítva: alkategórához rendelve.");
+            }
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
