@@ -24,12 +24,18 @@ class SubCategoryController extends Controller
     public function create()
     {
 
-        $subCategory = new Sub_category();
-        $categories = Category::all();
+        try {
+            $subCategory = new Sub_category();
+            $categories = Category::all();
 
-        return view('admin.sub_category.create')
-            ->with('subCategory', $subCategory)
-            ->with('categories', $categories);
+            return view('admin.sub_category.create')
+                ->with('subCategory', $subCategory)
+                ->with('categories', $categories);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
     public function store(Request $request)
@@ -55,24 +61,36 @@ class SubCategoryController extends Controller
     public function show($subCategoryId)
     {
 
-        $subCategory = Sub_category::find($subCategoryId);
-        $categories = Category::all();
-        //$category = Category::where('id', $categoryId)->first(); null a return , ha nincs eredmény
+        try {
+            $subCategory = Sub_category::findOrFail($subCategoryId);
+            $categories = Category::all();
+            //$category = Category::where('id', $categoryId)->first(); null a return , ha nincs eredmény
 
-        return view('admin.sub_category.show')
-            ->with('subCategory', $subCategory)
-            ->with('categories', $categories);
+            return view('admin.sub_category.show')
+                ->with('subCategory', $subCategory)
+                ->with('categories', $categories);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
 
     public function edit($subCategoryId)
     {
-        $subCategory = Sub_category::findOrFail($subCategoryId);
-        $categories = Category::all();
+        try {
+            $subCategory = Sub_category::findOrFail($subCategoryId);
+            $categories = Category::all();
 
-        return view('admin.sub_category.edit')
-            ->with('subCategory', $subCategory)
-            ->with('categories', $categories);
+            return view('admin.sub_category.edit')
+                ->with('subCategory', $subCategory)
+                ->with('categories', $categories);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
@@ -83,12 +101,21 @@ class SubCategoryController extends Controller
             'category_id' => 'required|not_in:0'
         ]);
 
-        $subCategory = Sub_category::findOrFail($id);
-        $subCategory->setAttributes($request->all());
-
         try {
-            $subCategory->save();
-            session()->flash('success', 'Kategória módosítva');
+            $subCategory = Sub_category::findOrFail($id);
+
+            if (Sub_category::has('products')->first() == null) {
+                $subCategory->setAttributes($request->all());
+                try {
+                    $subCategory->save();
+                    session()->flash('success', 'Alkategória módosítva');
+
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+                }
+            } else {
+                session()->flash('error', "Módosítás elutasítva: termékhez rendelve.");
+            }
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
@@ -99,11 +126,19 @@ class SubCategoryController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $category = Sub_category::find($id);
-
         try {
-            $category->delete();
-            session()->flash('success', 'Alkategória törölve');
+            $category = Sub_category::findOrFail($id);
+
+            if (Sub_category::has('products')->first() == null) {
+                try {
+                    $category->delete();
+                    session()->flash('success', 'Alkategória törölve');
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+                }
+            } else {
+                session()->flash('error', "Törlés elutasítva: termékhez rendelve.");
+            }
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
