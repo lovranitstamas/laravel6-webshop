@@ -18,4 +18,15 @@ class Mode_of_transport extends Model
     {
         return $this->belongsTo(Product::class, 'id', 'mode_of_transport_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_mode_of_transport',
+            'mode_of_transport_ids',
+            'product_id')
+            ->withTimestamps()
+            ->withPivot(['weight']);
+    }
 }
