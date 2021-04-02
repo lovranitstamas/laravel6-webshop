@@ -104,7 +104,9 @@ class SubCategoryController extends Controller
         try {
             $subCategory = Sub_category::findOrFail($id);
 
-            if (Sub_category::has('products')->first() == null) {
+            if (Sub_category::whereHas('products', function ($q) use ($id) {
+                    $q->where('sub_category_id', '=', $id);
+                })->first() == null) {
                 $subCategory->setAttributes($request->all());
                 try {
                     $subCategory->save();
@@ -129,7 +131,9 @@ class SubCategoryController extends Controller
         try {
             $category = Sub_category::findOrFail($id);
 
-            if (Sub_category::has('products')->first() == null) {
+            if (Sub_category::whereHas('products', function ($q) use ($id) {
+                    $q->where('sub_category_id', '=', $id);
+                })->first() == null) {
                 try {
                     $category->delete();
                     session()->flash('success', 'Alkategória törölve');
