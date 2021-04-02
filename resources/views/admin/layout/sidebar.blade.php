@@ -63,6 +63,7 @@
                           || \Route::currentRouteName() == 'admin.category.create'
                           || \Route::currentRouteName() == 'admin.category.edit'
                           || \Route::currentRouteName() == 'admin.category.show' ? ' active' : ''}}">
+                            <i class="fas fa-list-alt"></i>
                             <p>Kategória lista</p>
                         </a>
                     </li>
@@ -72,6 +73,7 @@
                           || \Route::currentRouteName() == 'admin.sub_category.create'
                           || \Route::currentRouteName() == 'admin.sub_category.edit'
                           || \Route::currentRouteName() == 'admin.sub_category.show' ? ' active' : ''}}">
+                            <i class="fas fa-list-alt"></i>
                             <p>Alkategória lista</p>
                         </a>
                     </li>
