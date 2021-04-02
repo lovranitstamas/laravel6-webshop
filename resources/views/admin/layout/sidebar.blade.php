@@ -77,6 +77,16 @@
                             <p>Alkategória lista</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.transport.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.transport.index'
+                          || \Route::currentRouteName() == 'admin.transport.create'
+                          || \Route::currentRouteName() == 'admin.transport.edit'
+                          || \Route::currentRouteName() == 'admin.transport.show' ? ' active' : ''}}">
+                            <i class="fa fa-truck" aria-hidden="true"></i>
+                            <p>Szállítási módok</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>

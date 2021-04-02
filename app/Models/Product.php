@@ -12,4 +12,9 @@ class Product extends Model
         //foreignKey, ownerKey
         return $this->belongsTo(Sub_category::class);
     }
+
+    public function modeOfTransport()
+    {
+        return $this->belongsTo(Mode_of_transport::class,'mode_of_transport_id','id');
+    }
 }

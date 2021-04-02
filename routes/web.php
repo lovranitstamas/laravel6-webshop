@@ -41,6 +41,7 @@ Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
 
         Route::resource('category', 'CategoryController');
         Route::resource('sub_category', 'SubCategoryController');
+        Route::resource('transport', 'TransportController');
     });
 });
 
