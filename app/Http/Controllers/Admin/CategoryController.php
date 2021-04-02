@@ -87,7 +87,7 @@ class CategoryController extends Controller
 
             $category = Category::findOrFail($id);
 
-            if (!Category::has('subCategories')->get()) {
+            if (Category::has('subCategories')->first() == null) {
                 //if($category->subCategories()->count()==0) {
 
                 $category->setAttributes($request->all());
@@ -115,7 +115,7 @@ class CategoryController extends Controller
 
             $category = Category::findOrFail($id);
 
-            if (!Category::has('subCategories')->get()) {
+            if (Category::has('subCategories')->first() == null) {
                 try {
                     $category->delete();
                     session()->flash('success', 'Kategória törölve');
