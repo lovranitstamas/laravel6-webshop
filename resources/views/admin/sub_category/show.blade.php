@@ -1,5 +1,11 @@
 @extends('admin.layout.layout')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Kezdőlap</a></li>
+    <li class="breadcrumb-item"><a href="{{route('admin.sub_category.index')}}">Alkategóriák</a></li>
+    <li class="breadcrumb-item active">Alkategória megtekintése</li>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
