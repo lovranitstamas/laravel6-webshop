@@ -26,7 +26,7 @@ class Mode_of_transport extends Model
             'product_mode_of_transport',
             'mode_of_transport_ids',
             'product_id')
-            ->withTimestamps()
-            ->withPivot(['weight']);
+            ->withTimestamps();
+            //->withPivot(['weight']);
     }
 }
