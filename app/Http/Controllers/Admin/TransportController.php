@@ -89,7 +89,9 @@ class TransportController extends Controller
 
             if (Mode_of_transport::whereHas('product', function ($q) use ($id) {
                     $q->where('mode_of_transport_id', '=', $id);
-                })->first() == null) {
+                })->first() == null &&
+                $transport->products()->pluck('name_hu')->count() == 0
+            ) {
 
                 $transport->setAttributes($request->all());
 
@@ -118,7 +120,8 @@ class TransportController extends Controller
 
             if (Mode_of_transport::whereHas('product', function ($q) use ($id) {
                     $q->where('mode_of_transport_id', '=', $id);
-                })->first() == null) {
+                })->first() == null &&
+                $transport->products()->pluck('name_hu')->count() == 0) {
                 try {
                     $transport->delete();
                     session()->flash('success', 'Szállítási mód törölve');
