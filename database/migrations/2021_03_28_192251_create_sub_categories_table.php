@@ -19,7 +19,7 @@ class CreateSubCategoriesTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->bigInteger('id')->autoIncrement();
-            $table->string('name_hu', 30)->nullable(false);
+            $table->string('name_hu', 40)->nullable(false);
             $table->bigInteger('category_id')->nullable(false);
 
             /*

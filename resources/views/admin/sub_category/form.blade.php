@@ -30,7 +30,7 @@
             <select name="category_id" class="form-control">
                 <option value="0"
                     {{!$subCategory->category() && !old('category_id')
-                      ? 'seelcted':''}}>Kérem
+                      ? 'selected':''}}>Kérem
                     válasszon!
                 </option>
                 @foreach($categories as $category)
