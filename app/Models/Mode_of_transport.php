@@ -14,10 +14,10 @@ class Mode_of_transport extends Model
         $this->mode_hu = $data['mode_hu'];
     }
 
-    public function product()
+    /*public function product()
     {
         return $this->belongsTo(Product::class, 'id', 'mode_of_transport_id');
-    }
+    }*/
 
     public function products()
     {

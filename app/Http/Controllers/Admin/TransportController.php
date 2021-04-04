@@ -87,9 +87,9 @@ class TransportController extends Controller
 
             $transport = Mode_of_transport::findOrFail($id);
 
-            if (Mode_of_transport::whereHas('product', function ($q) use ($id) {
+            if (/*Mode_of_transport::whereHas('product', function ($q) use ($id) {
                     $q->where('mode_of_transport_id', '=', $id);
-                })->first() == null &&
+                })->first() == null &&*/
                 $transport->products()->pluck('name_hu')->count() == 0
             ) {
 
@@ -118,9 +118,9 @@ class TransportController extends Controller
 
             $transport = Mode_of_transport::findOrFail($id);
 
-            if (Mode_of_transport::whereHas('product', function ($q) use ($id) {
+            if (/*Mode_of_transport::whereHas('product', function ($q) use ($id) {
                     $q->where('mode_of_transport_id', '=', $id);
-                })->first() == null &&
+                })->first() == null &&*/
                 $transport->products()->pluck('name_hu')->count() == 0) {
                 try {
                     $transport->delete();

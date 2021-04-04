@@ -149,10 +149,11 @@
             <select name="transports[]" id="transports" class="form-control" multiple>
                 @foreach($transports as $transport)
                     <option value="{{$transport->id}}"
-                        {{$product->id
+                          {{--$product->id
                           && $product->modeOfTransports()->pluck('mode_hu')->count()==0
-                          && $transport->id == $product->modeOfTransport->id ? 'selected':''}}
-                        {{$product->id && $product->hasModeOfTransport($transport->id) ? 'selected':''}}
+                          && $transport->id == $product->modeOfTransport->id ? 'selected':''--}}
+                        {{old('transports')===null && $product->id && $product->hasModeOfTransport($transport->id) ?
+                        'selected':''}}
                         {{old('transports')!==null && (collect(old('transports'))->contains($transport->id)) ?
                         'selected':''}}
                     >{{$transport->mode_hu}}

@@ -42,7 +42,7 @@
                                         <a href="{{route('admin.transport.show', $transport->id)}}"
                                            class="btn btn-info btn-sm">Megtekintés</a>
                                         {{--['id' => $category->id]--}}
-                                        @if($transport->product()->count()==0 &&
+                                        @if(/*$transport->product()->count()==0 &&*/
                                             $transport->products()->pluck('name_hu')->count()==0)
                                             <a href="{{route('admin.transport.edit', $transport->id)}}"
                                                class="btn btn-default btn-sm">Módosítás</a>
@@ -52,7 +52,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if($transport->product()->count()==0  &&
+                                    @if(/*$transport->product()->count()==0  &&*/
                                             $transport->products()->pluck('name_hu')->count()==0 )
                                         <form action="{{route('admin.transport.destroy', $transport->id)}}"
                                               method="POST">
