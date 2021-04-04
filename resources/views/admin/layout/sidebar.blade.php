@@ -97,6 +97,16 @@
                             <p>Termékek</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.order.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.order.index'
+                          || \Route::currentRouteName() == 'admin.order.create'
+                          || \Route::currentRouteName() == 'admin.order.edit'
+                          || \Route::currentRouteName() == 'admin.order.show' ? ' active' : ''}}">
+                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                            <p>Rendelések</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>

@@ -67,7 +67,7 @@
                             </tr>
                         @endforeach
                         @if (count($transports)==0)
-                            <td colspan="5"><h4 class="text-center font-weight-bold">A lista üres</h4></td>
+                            <td colspan="6"><h4 class="text-center font-weight-bold">A lista üres</h4></td>
                         @endif
                         </tbody>
                     </table>

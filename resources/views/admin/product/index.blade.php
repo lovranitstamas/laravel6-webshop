@@ -137,7 +137,7 @@
                             </tr>
                         @endforeach
                         @if (count($products)==0)
-                            <td colspan="5"><h4 class="text-center font-weight-bold">A raktárkészlet üres</h4></td>
+                            <td colspan="11"><h4 class="text-center font-weight-bold">A raktárkészlet üres</h4></td>
                         @endif
                         </tbody>
                     </table>

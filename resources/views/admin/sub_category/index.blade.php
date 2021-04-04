@@ -69,7 +69,7 @@
                             </tr>
                         @endforeach
                         @if (count($subCategories)==0)
-                            <td colspan="5"><h4 class="text-center font-weight-bold">A lista üres</h4></td>
+                            <td colspan="7"><h4 class="text-center font-weight-bold">A lista üres</h4></td>
                         @endif
                         </tbody>
                     </table>
