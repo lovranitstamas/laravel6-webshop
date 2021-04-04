@@ -58,6 +58,16 @@
                 </li>--}}
                 @if(auth()->guard()->user())
                     <li class="nav-item">
+                        <a href="{{route('admin.customer.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.customer.index'
+                          || \Route::currentRouteName() == 'admin.customer.create'
+                          || \Route::currentRouteName() == 'admin.customer.edit'
+                          || \Route::currentRouteName() == 'admin.customer.show' ? ' active' : ''}}">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <p>Vásárlók</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{route('admin.category.index')}}" class="nav-link
                         {{\Route::currentRouteName() == 'admin.category.index'
                           || \Route::currentRouteName() == 'admin.category.create'

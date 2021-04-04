@@ -35,7 +35,11 @@
                         @foreach($orders as $order)
                             <tr>
                                 <td>{{$order->id}}</td>
-                                <td>{{$order->customer->surname}} {{$order->customer->forename}}</td>
+                                <td>
+                                    <a href="{{route('admin.customer.edit', $order->customer->id)}}">
+                                        {{$order->customer->surname}} {{$order->customer->forename}}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{route('admin.product.edit', $order->product->id)}}">
                                         {{$order->product->name_hu}}
