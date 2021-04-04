@@ -48,6 +48,14 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'dev' => [
+            'driver' => 'local',
+            'root' => public_path('attachments'),
+            //show the files
+            'url' => env('APP_URL').'/attachments',
+            'visibility' => 'public',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

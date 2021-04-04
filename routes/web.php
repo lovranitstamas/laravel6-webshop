@@ -42,6 +42,9 @@ Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
         Route::resource('category', 'CategoryController');
         Route::resource('sub_category', 'SubCategoryController');
         Route::resource('transport', 'TransportController');
+        Route::resource('product', 'ProductController');
+
+        Route::get('/avatar/download/{path}/{name}', 'ProductController@avatarDownload')->name('avatar.download');
     });
 });
 

@@ -87,6 +87,16 @@
                             <p>Szállítási módok</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.product.index')}}" class="nav-link
+                        {{\Route::currentRouteName() == 'admin.product.index'
+                          || \Route::currentRouteName() == 'admin.product.create'
+                          || \Route::currentRouteName() == 'admin.product.edit'
+                          || \Route::currentRouteName() == 'admin.product.show' ? ' active' : ''}}">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            <p>Termékek</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>
