@@ -86,7 +86,7 @@
                                 <td>{{$product->price_hu}}</td>
                                 <td>{{strtoupper($product->payment_unit)}}</td>
                                 <td>
-                                    @if($product->mode_of_transport_id==null)
+                                    {{--@if($product->mode_of_transport_id==null)--}}
                                         @foreach($product->modeOfTransports()->pluck('mode_hu')->toArray() as
                                         $transport)
                                             @if(\Str::length($transport)>10)
@@ -98,7 +98,7 @@
                                             @endif
                                             <br>
                                         @endforeach
-                                    @else
+                                   {{-- @else
                                         @if(\Str::length($product->modeOfTransport->mode_hu)>10)
                                             <a href="#" title="{{$product->modeOfTransport->mode_hu}}">
                                                 {{\Str::limit($product->modeOfTransport->mode_hu, $limit = 10,$end='...')}}
@@ -106,7 +106,7 @@
                                         @else
                                             {{$product->modeOfTransport->mode_hu}}
                                         @endif
-                                    @endif
+                                    @endif--}}
                                 </td>
                                 <td>{{$product->created_at}}<br>
                                     {{$product->updated_at}}</td>
