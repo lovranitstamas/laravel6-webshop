@@ -65,4 +65,11 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function scopeOrderColumn($query, $data)
+    {
+        if (isset($data['orderBy']) && $data['orderBy']) {
+            $query->orderBy($data['orderBy'], $data['orderDir']);
+        }
+    }
+
 }

@@ -1,3 +1,4 @@
+<a href="{{route('visitors.shop')}}">Termékek</a> |
 @if(authCustomer())
     Belépve: {{authCustomer()->surname}} {{authCustomer()->forename}}
     <form action="{{route('login.destroy')}}" method="POST">

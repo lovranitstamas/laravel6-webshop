@@ -5,9 +5,11 @@
 <body>
 
 @include('frontend.layout.menu')
-<div class="container m-5">
-    @yield('content')
-</div>
 
+
+@yield('content')
+
+
+<script src="{{asset('public/js/app.js')}}"></script>
 </body>
 </html>
