@@ -69,8 +69,8 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.product.show', $product->id)}}"
-                                       class="btn btn-info btn-sm">Megtekintés</a>
+                                    <a href="{{route('visitors.shop.sow', $product->id)}}"
+                                       class="btn btn-info btn-sm">Egyéb részletek</a>
                                 </td>
                             </tr>
                         @endif

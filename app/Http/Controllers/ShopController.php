@@ -19,4 +19,21 @@ class ShopController extends Controller
         return view('frontend.shop.index')
             ->with('products', $products);
     }
+
+    public function show($productId)
+    {
+
+        try {
+
+            $product = Product::findOrFail($productId);
+
+            return view('frontend.shop.show')
+                ->with('product', $product);
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
 }
