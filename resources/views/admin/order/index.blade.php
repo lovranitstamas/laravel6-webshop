@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{$order->id}}</td>
                                 <td>
-                                    <a href="{{route('admin.customer.edit', $order->customer->id)}}">
+                                    <a href="{{route('admin.customer.show', $order->customer->id)}}">
                                         {{$order->customer->surname}} {{$order->customer->forename}}
                                     </a>
                                 </td>

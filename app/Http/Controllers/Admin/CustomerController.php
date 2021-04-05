@@ -29,9 +29,21 @@ class CustomerController extends Controller
 
     }
 
-    public function show($categoryId)
+    public function show($customerId)
     {
 
+        try {
+
+            $customer = Customer::findOrFail($customerId);
+
+            return view('admin.customer.show')
+                ->with('customer', $customer);
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
     public function edit($categoryId)
