@@ -21,6 +21,8 @@ Route::get('/', 'DefaultController@index')->name('index');
 Route::get('/login', 'CustomersAuthController@create')->name('login.create');
 Route::post('/login', 'CustomersAuthController@store')->name('login.store');
 
+Route::get('/shop', 'ShopController@index')->name('visitors.shop');
+
 Route::get('/registration', 'CustomersController@create')->name('customer.create');
 Route::post('/registration', 'CustomersController@store')->name('customer.store');
 
@@ -31,13 +33,14 @@ Route::middleware('customer_auth')->group(function () {
 
 Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
     Route::namespace('Auth')->group(function () {
+
         Route::get('/login', 'LoginController@showLoginForm')->name('login.create');
         Route::post('/login', 'LoginController@login')->name('login.store');
         Route::post('/logout', 'LoginController@logout')->name('logout');
     });
 
     Route::middleware('admin_auth')->group(function () {
-        Route::get('/', 'DashboardController@index')->name('dashboard');
+        Route::get('/index', 'DashboardController@index')->name('dashboard');
 
         Route::resource('customer', 'CustomerController');
         Route::resource('category', 'CategoryController');
