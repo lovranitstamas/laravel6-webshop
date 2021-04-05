@@ -21,6 +21,11 @@
                                 @endforeach
                             </div>
                         @endif
+
+                        <a class="btn btn-primary"
+                           href="{{route('visitors.shop', ['page' => request()->input('page')])}}">
+                            Vissza
+                        </a>
                     </div>
 
                 </div>

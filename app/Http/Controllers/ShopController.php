@@ -15,7 +15,7 @@ class ShopController extends Controller
         $search['orderBy'] = $request->input('orderBy');
         $search['orderDir'] = $request->input('orderDir');
 
-        $products = Product::orderColumn($search)->get();
+        $products = Product::orderColumn($search)->where('state', 1)->paginate(2);
         return view('frontend.shop.index')
             ->with('products', $products);
     }
