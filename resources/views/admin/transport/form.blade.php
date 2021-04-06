@@ -25,6 +25,17 @@
             @endif
         </div>
 
+        <div class="form-group">
+            Extra költség (opcionális):
+            <input type="text" name="extra_cost" value="{{old('extra_cost') ?: $transport->extra_cost}}"
+                   class="{{$errors->first('extra_cost') ? 'has-error': ''}} form-control">
+            @if($errors->first('extra_cost'))
+                <p style="color:red">
+                    {{$errors->first('extra_cost')}}
+                </p>
+            @endif
+        </div>
+
         @if($transport->id)
             <div class="form-group">
                 Létrehozás dátuma:

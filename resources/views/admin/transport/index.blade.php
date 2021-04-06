@@ -24,6 +24,7 @@
                         <tr>
                             <th>#</th>
                             <th>Mód neve</th>
+                            <th>Extra költség</th>
                             <th>Létrehozás dátuma</th>
                             <th>Módosítás dátuma</th>
                             <th>Megtekintés/Módosítás</th>
@@ -35,6 +36,13 @@
                             <tr>
                                 <td>{{$transport->id}}</td>
                                 <td>{{$transport->mode_hu}}</td>
+                                <td>
+                                    @if($transport->extra_cost!==null)
+                                        {{$transport->extra_cost}}
+                                    @else
+                                        Nincs
+                                    @endif
+                                </td>
                                 <td>{{$transport->created_at}}</td>
                                 <td>{{$transport->updated_at}}</td>
                                 <td>

@@ -32,6 +32,7 @@ class TransportController extends Controller
     {
         $this->validate($request, [
             'mode_hu' => 'required|max:50|unique:mode_of_transports,mode_hu',
+            'extra_cost' => 'nullable|min:1|max:32767|integer',
         ]);
 
         $transport = new Mode_of_transport();
@@ -81,6 +82,7 @@ class TransportController extends Controller
 
         $this->validate($request, [
             'mode_hu' => 'required|max:50|unique:mode_of_transports,mode_hu,' . $id,
+            'extra_cost' => 'nullable|min:1|max:32767|integer',
         ]);
 
         try {
