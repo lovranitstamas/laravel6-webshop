@@ -10,12 +10,15 @@ class ShopController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::all();
+        //$products = Product::all();
 
-        $search['orderBy'] = $request->input('orderBy');
-        $search['orderDir'] = $request->input('orderDir');
+        $search = $request->input('search');
+        $search['sort_by'] = $request->input('orderBy');
+        $search['sorting_direction'] = $request->input('orderDir');
 
-        $products = Product::orderColumn($search)->where('state', 1)->paginate(2);
+        //$products = Product::orderColumn($search)->where('state', 1)->paginate(2);
+        $products = Product::search($search)->where('state', 1)->paginate(2);
+
         return view('frontend.shop.index')
             ->with('products', $products);
     }

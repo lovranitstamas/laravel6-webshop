@@ -58,12 +58,12 @@
                                           ])}}">Letöltés</a>
                                 </td>
                                 <td><span class="font-weight-bold">
-                                        @if(\Str::length($product->category->name_hu)>13)
-                                            <a href="#" title="{{$product->category->name_hu}}">
-                                                {{\Str::limit($product->category->name_hu,$limit = 13, $end = '...')}}
+                                        @if(\Str::length($product->subCategory->category->name_hu)>13)
+                                            <a href="#" title="{{$product->subCategory->category->name_hu}}">
+                                                {{\Str::limit($product->subCategory->category->name_hu,$limit = 13, $end = '...')}}
                                             </a>
                                         @else
-                                            {{$product->category->name_hu}}
+                                            {{$product->subCategory->category->name_hu}}
                                         @endif
                                     </span>
                                     <br>

@@ -22,7 +22,7 @@ Route::get('/login', 'CustomersAuthController@create')->name('login.create');
 Route::post('/login', 'CustomersAuthController@store')->name('login.store');
 
 Route::get('/shop', 'ShopController@index')->name('visitors.shop');
-Route::get('/shop/show/{productId}', 'ShopController@show')->name('visitors.shop.sow');
+Route::get('/shop/show/{product}/{page}', 'ShopController@show')->name('visitors.shop.show');
 
 Route::get('/registration', 'CustomersController@create')->name('customer.create');
 Route::post('/registration', 'CustomersController@store')->name('customer.store');

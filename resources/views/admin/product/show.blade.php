@@ -67,12 +67,12 @@
                                 @if($product->subCategory()->count()==0)
                                     <option value="{{$subCategory->id}}"
                                         {{$subCategory->id == old('sub_category_id') ? 'selected': ''}}>
-                                        {{$subCategory->category->name_hu}} - {{$subCategory->name_hu}}
+                                        {{$product->subCategory->category->name_hu}} - {{$subCategory->name_hu}}
                                     </option>
                                 @else
                                     <option value="{{$subCategory->id}}"
-                                        {{$product->subCategory->id == $subCategory->category->id ? 'selected': ''}}>
-                                        {{$subCategory->category->name_hu}} - {{$subCategory->name_hu}}
+                                        {{$product->subCategory->id == $subCategory->id ? 'selected': ''}}>
+                                        {{$product->subCategory->category->name_hu}} - {{$subCategory->name_hu}}
                                     </option>
                                 @endif
                             @endforeach
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="price_hu">Ár:</label>
                         <input type="text" name="price_hu" id="price_hu"
-                               value="$product->price_hu}}"
+                               value="{{$product->price_hu}}"
                                class="form-control" disabled>
                     </div>
 
@@ -120,10 +120,11 @@
                         <select name="transports[]" id="transports" class="form-control" multiple disabled>
                             @foreach($transports as $transport)
                                 <option value="{{$transport->id}}"
-                                    {{$product->id
+{{--                                    {{$product->id
                                       && $product->modeOfTransports()->pluck('mode_hu')->count()==0
-                                      && $transport->id == $product->modeOfTransport->id ? 'selected':''}}
-                                    {{$product->id && $product->hasModeOfTransport($transport->id) ? 'selected':''}}
+                                      && $transport->id == $product->modeOfTransport->id ? 'selected':''}}--}}
+                                    {{old('transports')===null && $product->id && $product->hasModeOfTransport
+                                    ($transport->id) ? 'selected':''}}
                                     {{old('transports')!==null && (collect(old('transports'))->contains($transport->id)) ?
                                     'selected':''}}
                                 >{{$transport->mode_hu}}

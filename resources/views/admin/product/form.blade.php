@@ -70,10 +70,17 @@
                             {{$subCategory->category->name_hu}} - {{$subCategory->name_hu}}
                         </option>
                     @else
-                        <option value="{{$subCategory->id}}"
-                            {{$product->subCategory->id == $subCategory->category->id ? 'selected': ''}}>
-                            {{$subCategory->category->name_hu}} - {{$subCategory->name_hu}}
-                        </option>
+                        @if(old('sub_category_id'))
+                            <option value="{{$subCategory->id}}"
+                                {{$subCategory->id == old('sub_category_id') ? 'selected': ''}}>
+                                {{$product->subCategory->category->name_hu}} - {{$subCategory->name_hu}}
+                            </option>
+                        @else
+                            <option value="{{$subCategory->id}}"
+                                {{$product->subCategory->id == $subCategory->id ? 'selected': ''}}>
+                                {{$product->subCategory->category->name_hu}} - {{$subCategory->name_hu}}
+                            </option>
+                        @endif
                     @endif
                 @endforeach
             </select>
@@ -149,9 +156,9 @@
             <select name="transports[]" id="transports" class="form-control" multiple>
                 @foreach($transports as $transport)
                     <option value="{{$transport->id}}"
-                          {{--$product->id
-                          && $product->modeOfTransports()->pluck('mode_hu')->count()==0
-                          && $transport->id == $product->modeOfTransport->id ? 'selected':''--}}
+                        {{--$product->id
+                        && $product->modeOfTransports()->pluck('mode_hu')->count()==0
+                        && $transport->id == $product->modeOfTransport->id ? 'selected':''--}}
                         {{old('transports')===null && $product->id && $product->hasModeOfTransport($transport->id) ?
                         'selected':''}}
                         {{old('transports')!==null && (collect(old('transports'))->contains($transport->id)) ?

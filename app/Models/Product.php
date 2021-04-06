@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends SearchModel
 {
 
     public function setAttributes($data)
@@ -25,12 +25,13 @@ class Product extends Model
 
     public function category()
     {
-        return $this->hasOneThrough(
+        return $this->hasManyThrough(
             Category::class,
             Sub_category::class,
             'category_id',
             'id',
-            'sub_category_id'
+            'sub_category_id',
+            'id'
         );
     }
 
@@ -71,5 +72,6 @@ class Product extends Model
             $query->orderBy($data['orderBy'], $data['orderDir']);
         }
     }
+
 
 }
