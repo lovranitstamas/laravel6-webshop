@@ -17,6 +17,7 @@
                             {{-- <th class="align-top">Ár</th>--}}
                             <th class="align-top">{!! orderTableHeader('price_hu', 'Ár') !!}</th>
                             <th class="align-top">Szállítási mód</th>
+                            <th class="align-top">Sz. költség</th>
                             <th class="align-top">Megtekintés</th>
                         </tr>
                         </thead>
@@ -97,6 +98,17 @@
                                     @foreach($product->modeOfTransports()->pluck('mode_hu')->toArray() as
                                     $transport)
                                         {{$transport}} <br>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($product->modeOfTransports()->pluck('extra_cost')->toArray() as
+                                    $extra_cost)
+                                        @if($extra_cost!==null)
+                                            {{$extra_cost}} FT
+                                        @else
+                                            Nincs
+                                        @endif
+                                        <br>
                                     @endforeach
                                 </td>
                                 <td>
