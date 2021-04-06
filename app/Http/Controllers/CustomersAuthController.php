@@ -48,6 +48,56 @@ class CustomersAuthController extends Controller
 
     }
 
+    public function edit()
+    {
+
+        //try {
+
+        $user = Customer::findOrFail(authCustomer()->id);
+        return view('frontend.auth.edit')->with('user', $user);
+        /*} catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }*/
+
+        //return redirect()->back();
+
+    }
+
+    public function update(Request $request)
+    {
+
+        $this->validate($request, [
+            'surname' => 'required',
+            'forename' => 'required',
+            'zipcode' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|unique:customers,email,' . authCustomer()->id,
+            'password' => 'nullable|min:5|confirmed',
+        ]);
+
+        try {
+
+            $customer = Customer::findOrFail(authCustomer()->id);
+
+            $customer->setAttributes($request->all());
+
+            try {
+                $customer->save();
+                session()->flash('success', 'Módosítás megtörtént');
+            } catch (\Exception $e) {
+                session()->flash('error', $e->getMessage());
+            }
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+
+    }
+
     public function destroy()
     {
         \Auth::guard('customer')->logout();

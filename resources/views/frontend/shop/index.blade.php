@@ -117,6 +117,10 @@
                                          'page' => request()->input('page') ?: 1
                                         ])}}"
                                        class="btn btn-info btn-sm">Egyéb részletek</a>
+                                    <br>
+                                    @if(authCustomer())
+                                        Rendelés
+                                    @endif
                                 </td>
                             </tr>
 

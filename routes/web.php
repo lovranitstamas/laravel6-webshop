@@ -29,6 +29,8 @@ Route::post('/registration', 'CustomersController@store')->name('customer.store'
 
 Route::middleware('customer_auth')->group(function () {
     Route::get('/customers', 'CustomersAuthController@index')->name('customers.index');
+    Route::get('/customer/edit', 'CustomersAuthController@edit')->name('customer.edit');
+    Route::put('/customer/update', 'CustomersAuthController@update')->name('customer.update');
     Route::delete('/logout', 'CustomersAuthController@destroy')->name('login.destroy');
 });
 
