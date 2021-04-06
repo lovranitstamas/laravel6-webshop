@@ -43,6 +43,7 @@
                                        value="{{request()->input('search.price_hu')}}">
                             </td>
                             <td></td>
+                            <td></td>
                             <td>
                                 <div class="btn-group">
                                     <input role="button" type="submit" class="btn btn-primary btn-sm" value="Keresés">
