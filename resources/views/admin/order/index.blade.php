@@ -46,7 +46,7 @@
                                     </a>
                                 </td>
                                 <td>{{$order->quantity}}</td>
-                                <td>{{$order->total_amount}}</td>
+                                <td>{{$order->total_amount}} FT</td>
                                 <td>
                                     @if($order->completed==1)
                                         Aktív

@@ -9,6 +9,7 @@
                         <h3>{{$product->name_hu}}</h3>
                     </div>
                     <div class="box-body">
+                        @include('frontend.layout.message')
 
                         {{--other attachments--}}
                         @if(count($product->attachments)>0)

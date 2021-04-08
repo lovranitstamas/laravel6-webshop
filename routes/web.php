@@ -32,6 +32,9 @@ Route::middleware('customer_auth')->group(function () {
     Route::get('/customer/edit', 'CustomersAuthController@edit')->name('customer.edit');
     Route::put('/customer/update', 'CustomersAuthController@update')->name('customer.update');
     Route::delete('/logout', 'CustomersAuthController@destroy')->name('login.destroy');
+
+    Route::get('/shop/order/{product}', 'ShopController@order')->name('visitors.shop.order');
+    Route::post('/shop/order', 'ShopController@store')->name('visitors.shop.order.store');
 });
 
 Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {

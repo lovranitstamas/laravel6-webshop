@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,42 @@ class ShopController extends Controller
             return view('frontend.shop.show')
                 ->with('product', $product);
 
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function order($productId)
+    {
+        try {
+
+            $product = Product::findOrFail($productId);
+
+            return view('frontend.shop.order')
+                ->with('product', $product);
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'quantity' => 'required|min:1|max:32767|integer',
+            'transport_id' => 'required|not_in:0'
+        ]);
+
+        $order = new Order();
+        $order->setAttributes($request->all());
+
+        try {
+            $order->save();
+            session()->flash('success', 'Rendelés elmentve');
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }

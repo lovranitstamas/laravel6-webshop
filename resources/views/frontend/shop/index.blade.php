@@ -6,6 +6,8 @@
             <div class="col-12">
                 <h1 class="mt-5">Termékek</h1>
 
+                @include('frontend.layout.message')
+
                 <form action="{{route('visitors.shop')}}" method="GET">
                     <table class="table table-hover text-nowrap mt-3">
                         <thead>
@@ -120,7 +122,10 @@
                                        class="btn btn-info btn-sm">Egyéb részletek</a>
                                     <br>
                                     @if(authCustomer())
-                                        Rendelés
+                                        <a href="{{route('visitors.shop.order', [
+                                          'product' => $product->id
+                                        ])}}"
+                                           class="btn btn-primary mt-1">Tovább</a>
                                     @endif
                                 </td>
                             </tr>
