@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CustomersAuthController extends Controller
@@ -102,5 +103,22 @@ class CustomersAuthController extends Controller
     {
         \Auth::guard('customer')->logout();
         return redirect()->route("index");
+    }
+
+    public function orderings()
+    {
+
+        try {
+
+            $orders = Order::where('customer_id', authCustomer()->id)->get();
+
+            return view('frontend.shop.orderings')
+                ->with('orders', $orders);
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 }

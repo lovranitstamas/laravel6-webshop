@@ -1,7 +1,8 @@
 <a href="{{route('visitors.shop')}}">Termékek</a> |
 @if(authCustomer())
-    Belépve: {{authCustomer()->surname}} {{authCustomer()->forename}} |
     <a href="{{route('customer.edit')}}">Profil megtekintés</a> |
+    <a href="{{route('visitors.shop.orderings')}}">Rendelések</a> |
+    Belépve: {{authCustomer()->surname}} {{authCustomer()->forename}} |
     <form action="{{route('login.destroy')}}" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         @csrf

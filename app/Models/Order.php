@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
+
     public function setAttributes($data)
     {
         $this->customer_id = authCustomer()->id;
@@ -29,6 +30,11 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function transport()
+    {
+        return $this->belongsTo(Mode_of_transport::class, 'transport_id', 'id');
     }
 
 }
