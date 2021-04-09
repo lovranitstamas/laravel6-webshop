@@ -68,8 +68,26 @@ class ShopController extends Controller
         $order->setAttributes($request->all());
 
         try {
-            $order->save();
-            session()->flash('success', 'Rendelés elmentve');
+
+            $product = Product::where('id', $request->input('product_id'))->first();
+            $product->inventory -= $request->input('quantity');
+
+            if ($product->inventory >= 0) {
+
+                $product->save();
+                $order->save();
+
+                //TODO transaction
+
+                session()->flash('success', 'Rendelés elmentve');
+            } else {
+                $rest = ($request->input('quantity') - (0 - $product->inventory));
+                session()->flash('error',
+                    $rest > 0 ? 'Maximálisan rendelhető darabszám: ' . $rest . ' db.' : "A termék nincs raktáron. Szíves türelmét kérjük.");
+                // 150 - (0 - (-50)) = 100  if the inventory = 100 and the order 150
+                // 30 - (0- (-22)) = 8          8 , 30
+            }
+
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }

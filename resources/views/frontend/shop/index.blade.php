@@ -91,9 +91,9 @@
                                 </td>
                                 <td>
                                     @if($product->inventory>0)
-                                        Raktáron
+                                        Elérhető
                                     @else
-                                        Nincs raktáron
+                                        <span class="font-weight-bold text-danger">Nem elérhető</span>
                                     @endif
                                 </td>
                                 <td>{{$product->price_hu}} {{strtoupper($product->payment_unit)}}</td>
@@ -121,11 +121,15 @@
                                         ])}}"
                                        class="btn btn-info btn-sm">Egyéb részletek</a>
                                     <br>
-                                    @if(authCustomer())
-                                        <a href="{{route('visitors.shop.order', [
+                                    @if($product->inventory>0)
+                                        @if(authCustomer())
+                                            <a href="{{route('visitors.shop.order', [
                                           'product' => $product->id
                                         ])}}"
-                                           class="btn btn-primary mt-1">Tovább</a>
+                                               class="btn btn-primary mt-1">Tovább</a>
+                                        @endif
+                                    @else
+                                        Kívánságkosár
                                     @endif
                                 </td>
                             </tr>
