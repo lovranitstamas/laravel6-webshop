@@ -36,6 +36,10 @@ Route::middleware('customer_auth')->group(function () {
     Route::get('/shop/order/{product}', 'ShopController@order')->name('visitors.shop.order');
     Route::post('/shop/order', 'ShopController@store')->name('visitors.shop.order.store');
     Route::get('/shop/orderings', 'CustomersAuthController@orderings')->name('visitors.shop.orderings');
+    Route::get('/shop/opinion/{orderId}/{productId}', 'ShopController@opinion')->name('visitors.shop.opinion');
+
+    Route::post('/shop/comment', 'ShopController@comment')->name('visitors.shop.comment.store');
+    Route::post('/shop/rating', 'ShopController@rating')->name('visitors.shop.rating.store');
 });
 
 Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {

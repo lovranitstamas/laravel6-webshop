@@ -13,7 +13,6 @@
                         <th class="align-top">Név</th>
                         <th class="align-top">Kategória<br>Alkategória</th>
                         <th class="align-top">Ár</th>
-                        <th class="align-top">Fizetési egység</th>
                         <th class="align-top">Rendelt DB</th>
                         <th class="align-top">Végösszeg</th>
                         <th class="align-top">Szállítási mód</th>
@@ -60,19 +59,41 @@
                                     {{$order->product->subCategory->name_hu}}
                                 @endif
                             </td>
-                            <td>{{$order->product->price_hu}}</td>
-                            <td>{{strtoupper($order->product->payment_unit)}}</td>
+                            <td>{{$order->product->price_hu}}
+                                {{strtoupper($order->product->payment_unit)}}</td>
                             <td>{{$order->quantity}}</td>
-                            <td>{{$order->total_amount}} FT</td>
+                            <td>{{$order->total_amount}} {{strtoupper($order->product->payment_unit)}}</td>
                             <td>{{$order->transport->mode_hu}}</td>
                             <td>
                                 @if($order->transport->extra_cost!=null)
-                                    {{$order->transport->extra_cost}} FT
+                                    {{$order->transport->extra_cost}}
+                                    {{strtoupper($order->product->payment_unit)}}
                                 @else
                                     Nincs
                                 @endif
                             </td>
-                            <td>{{$order->created_at}}<br>
+                            <td>{{$order->created_at}}</td>
+                            <td>
+                                @if($order->completed)
+                                    <a href="{{route('visitors.shop.opinion', [
+                                          'orderId' => $order->id,
+                                          'productId' => $order->product->id
+                                        ])}}"
+                                       class="btn btn-primary mt-1">
+                                        @if(
+                                          in_array(authCustomer()->id,$order->product->comments->pluck('customer_id')->toArray())
+                                            &&
+                                          in_array(authCustomer()->id,$order->product->ratings->pluck('customer_id')->toArray())
+                                        )
+                                            Mutat
+                                        @else
+                                            Értékelés
+                                        @endif
+                                    </a>
+                                @else
+                                    Rendelés folyamatban
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     @if (count($orders)==0)

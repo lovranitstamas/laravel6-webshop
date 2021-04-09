@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -87,6 +89,73 @@ class ShopController extends Controller
                 // 150 - (0 - (-50)) = 100  if the inventory = 100 and the order 150
                 // 30 - (0- (-22)) = 8          8 , 30
             }
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function opinion($orderId, $productId)
+    {
+        try {
+
+            $order = Order::where('id', $orderId)
+                ->where('customer_id', authCustomer()->id)
+                ->firstOrFail();
+
+            $comment = Comment::where('customer_id', authCustomer()->id)->where('product_id', $productId)->first();
+            $rating = Rating::where('customer_id', authCustomer()->id)->where('product_id', $productId)->first();
+
+            return view('frontend.shop.opinion')
+                ->with('order', $order)
+                ->with('comment', $comment)
+                ->with('rating', $rating);
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function comment(Request $request)
+    {
+
+        $this->validate($request, [
+            'content' => 'required|min:20'
+        ]);
+
+        $comment = new Comment();
+        $comment->setAttributes($request->all());
+
+        try {
+
+            $comment->save();
+            session()->flash('success', 'Értékelés elmentve');
+
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function rating(Request $request)
+    {
+
+        $this->validate($request, [
+            'value' => 'required|between:1,5|not_in:0'
+        ]);
+
+        $rating = new Rating();
+        $rating->setAttributes($request->all());
+
+        try {
+
+            $rating->save();
+            session()->flash('success', 'Értékelés elmentve');
 
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
