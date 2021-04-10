@@ -22,10 +22,10 @@ class CreateProductModeOfTransportTable extends Migration
             $table->bigInteger('product_id');
             $table->bigInteger('mode_of_transport_id');
 
-            $table->foreign('product_id')
+            $table->foreign('product_id','product_id')
                 ->references('id')->on('products');
 
-            $table->foreign('mode_of_transport_id')
+            $table->foreign('mode_of_transport_id','mode_of_transport_id')
                 ->references('id')->on('mode_of_transports');
 
             $table->timestamps();
