@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Confirmation;
 use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ShopController extends Controller
 {
@@ -79,6 +81,15 @@ class ShopController extends Controller
                 $product->save();
                 $order->save();
 
+                $to_email = authCustomer()->email;
+                Mail::to($to_email)
+                    ->send(
+                    new Confirmation(
+                        $order,
+                        $product,
+                        authCustomer()
+                    )
+                );
                 //TODO transaction
 
                 session()->flash('success', 'Rendelés elmentve');
