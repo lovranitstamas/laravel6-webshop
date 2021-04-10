@@ -20,19 +20,15 @@ class CreateOrdersTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->bigInteger('id')->autoIncrement();
-            //$table->string('id')->primary()->index();
-            //in the future delete
+
             $table->bigInteger('customer_id')->nullable(false);
-            //
+
             $table->bigInteger('product_id')->nullable(false);
             $table->smallInteger('quantity')->nullable(false);
 
-            //in the future delete
             $table->integer('total_amount')->nullable(false);
             $table->bigInteger('coupon_id')->nullable();
             $table->tinyInteger('completed')->default(0);
-            //
-
 
             $table->timestamps();
 
