@@ -14,4 +14,9 @@ class Rating extends Model
         $this->value = $data['value'];
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }

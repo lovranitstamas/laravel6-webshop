@@ -14,4 +14,9 @@ class Comment extends Model
         $this->content = $data['content'];
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }

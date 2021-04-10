@@ -15,7 +15,9 @@
                     <div class="card-tools">
                         <a href="{{route('admin.product.create')}}" class="btn btn-primary">Termék létrehozása</a>
                     </div>
-                    <br>*** a termékez több kép is tartozik
+                    <br>* kommentek
+                    <br>** értékelések
+                    <br>*** további képek
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
@@ -40,12 +42,18 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->name_hu}}
-                                    {{--other pictures indicator--}}
+                                <td>{{$product->id}}
+                                    @if(count($product->comments->pluck('value')->toArray())>0)
+                                        <br><span class="font-weight-bold">*</span>
+                                    @endif
+                                    @if(count($product->ratings->pluck('value')->toArray())>0)
+                                        <br><span class="font-weight-bold">**</span>
+                                    @endif
                                     @if(count($product->attachments)>0)
-                                        <span class="font-weight-bold">***</span>
-                                    @endif <br>
+                                        <br><span class="font-weight-bold">***</span>
+                                    @endif
+                                </td>
+                                <td>{{$product->name_hu}}<br>
                                     {{--avatar--}}
                                     <a href="{{ \Storage::disk('dev')->url($product->avatar_path)}}">
                                         <img src="{{ \Storage::disk('dev')->url($product->avatar_path)}}"

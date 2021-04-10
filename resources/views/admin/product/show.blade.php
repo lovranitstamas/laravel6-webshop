@@ -120,9 +120,9 @@
                         <select name="transports[]" id="transports" class="form-control" multiple disabled>
                             @foreach($transports as $transport)
                                 <option value="{{$transport->id}}"
-{{--                                    {{$product->id
-                                      && $product->modeOfTransports()->pluck('mode_hu')->count()==0
-                                      && $transport->id == $product->modeOfTransport->id ? 'selected':''}}--}}
+                                    {{--                                    {{$product->id
+                                                                          && $product->modeOfTransports()->pluck('mode_hu')->count()==0
+                                                                          && $transport->id == $product->modeOfTransport->id ? 'selected':''}}--}}
                                     {{old('transports')===null && $product->id && $product->hasModeOfTransport
                                     ($transport->id) ? 'selected':''}}
                                     {{old('transports')!==null && (collect(old('transports'))->contains($transport->id)) ?
@@ -147,6 +147,33 @@
                     </div>
 
                 </div>
+
+                @if(count($product->comments->pluck('content')->toArray())>0)
+                    <p class="mt-4" style="font-size: 22px;">Kommentek</p>
+                    @foreach($product->comments as $comment)
+                        <p>Bejegyző:
+                            <a href="{{route('admin.customer.show', $comment->customer->id)}}">
+                                {{$comment->customer->surname}}
+                                {{$comment->customer->forename}}
+                            </a>
+                        </p>
+                        <div>{{$comment->content}}</div>
+                    @endforeach
+                    <hr>
+                @endif
+
+                @if(count($product->ratings->pluck('value')->toArray())>0)
+                    <p class="mt-4" style="font-size: 22px;">Értékelések (1-5)</p>
+                    @foreach($product->ratings as $rating)
+                        <p>Bejegyző:
+                            <a href="{{route('admin.customer.show', $rating->customer->id)}}">
+                                {{$rating->customer->surname}}
+                                {{$rating->customer->forename}}
+                            </a>
+                        </p>
+                        <div>{{$rating->value}}</div>
+                    @endforeach
+                @endif
 
             </div>
         </div>
