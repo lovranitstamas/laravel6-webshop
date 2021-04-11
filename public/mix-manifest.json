@@ -2,5 +2,6 @@
     "/css/app.css": "/css/app.css",
     "/css/admin/admin.css": "/css/admin/admin.css",
     "/js/app.js": "/js/app.js",
+    "/css/select2/select2.css": "/css/select2/select2.css",
     "/js/admin.js": "/js/admin.js"
 }

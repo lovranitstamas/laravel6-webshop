@@ -15,11 +15,14 @@ const mix = require('laravel-mix');
     .sass('resources/sass/app.scss', 'public/css');*/
 
 mix.scripts([
-    'resources/js/app.js',
+    "node_modules/popper.js/dist/umd/popper.js",
+    "node_modules/jquery/dist/jquery.js",
     "node_modules/bootstrap/dist/js/bootstrap.js",
-    "node_modules/popper.js/dist/popper.js"
+    'resources/js/app.js',
+    "node_modules/select2/dist/js/select2.js"
 ], 'public/js/app.js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .copy('node_modules/select2/dist/css/select2.css', 'public/css/select2');
 
 mix.scripts([
     'node_modules/admin-lte/plugins/jquery/jquery.js',
