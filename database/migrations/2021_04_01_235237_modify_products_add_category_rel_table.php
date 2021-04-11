@@ -20,7 +20,7 @@ class ModifyProductsAddCategoryRelTable extends Migration
             /*
             * Constraints
             * */
-            $table->foreign('sub_category_id','sub_category_id')
+            $table->foreign('sub_category_id')
                 ->references('id')->on('sub_categories')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');

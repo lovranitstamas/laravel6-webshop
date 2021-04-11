@@ -19,7 +19,7 @@ class CreateOrderStatesTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->engine = 'InnoDB';
 
-            $table->bigInteger('id')->index('id');
+            $table->bigInteger('order_id')->index();
             $table->bigInteger('customer_id')->nullable(false);
             $table->integer('total_amount')->nullable(false);
             $table->bigInteger('coupon_id')->nullable();
@@ -30,17 +30,17 @@ class CreateOrderStatesTable extends Migration
             /*
             * Constraints
             * */
-            $table->foreign('customer_id','customer_id')
+            $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('coupon_id','coupon_id')
+            $table->foreign('coupon_id')
                 ->references('id')->on('coupons')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('id','id')
+            $table->foreign('order_id')
                 ->references('id')->on('orders')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -57,7 +57,7 @@ class CreateOrderStatesTable extends Migration
         Schema::table('order_states', function (Blueprint $table) {
             $table->dropForeign(['customer_id']);
             $table->dropForeign(['coupon_id']);
-            $table->dropForeign(['id']);
+            $table->dropForeign(['order_id']);
         });
 
         Schema::dropIfExists('order_states');

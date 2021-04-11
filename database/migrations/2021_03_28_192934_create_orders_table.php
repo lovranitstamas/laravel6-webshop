@@ -35,17 +35,17 @@ class CreateOrdersTable extends Migration
             /*
             * Constraints
             * */
-            $table->foreign('customer_id','customer_id')
+            $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('product_id','product_id')
+            $table->foreign('product_id')
                 ->references('id')->on('products')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('coupon_id','coupon_id')
+            $table->foreign('coupon_id')
                 ->references('id')->on('coupons')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -59,7 +59,7 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('order_states', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             $table->dropForeign(['customer_id']);
             $table->dropForeign(['product_id']);
             $table->dropForeign(['coupon_id']);

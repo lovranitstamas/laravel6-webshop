@@ -32,7 +32,7 @@ class CreateProductsTable extends Migration
             /*
             * Constraints
             * */
-            $table->foreign('mode_of_transport_id','mode_of_transport_id')
+            $table->foreign('mode_of_transport_id')
                 ->references('id')->on('mode_of_transports')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');

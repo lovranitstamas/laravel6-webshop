@@ -29,12 +29,12 @@ class CreateCommentsTable extends Migration
             /*
             * Constraints
             * */
-            $table->foreign('customer_id','customer_id')
+            $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('product_id','product_id')
+            $table->foreign('product_id')
                 ->references('id')->on('products')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -49,7 +49,8 @@ class CreateCommentsTable extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['customer_id', 'product_id']);
+            $table->dropForeign(['customer_id']);
+            $table->dropForeign(['product_id']);
         });
 
         Schema::dropIfExists('comments');

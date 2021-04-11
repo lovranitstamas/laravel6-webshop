@@ -16,7 +16,7 @@ class ModifyOrdersAddFkKeyTable extends Migration
 
         Schema::table('orders', function (Blueprint $table) {
 
-            $table->foreign('transport_id', 'transport_id')
+            $table->foreign('transport_id')
                 ->references('id')->on('mode_of_transports')
                 //->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -31,7 +31,7 @@ class ModifyOrdersAddFkKeyTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign(['transport_id']);
+            $table->dropForeign('orders_transport_id_foreign');
         });
     }
 }
